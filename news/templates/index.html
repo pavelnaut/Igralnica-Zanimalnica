@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Начало</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container" style="margin-top: 2%">
+
+        <div class="row">
+            {% for post in posts %}
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <div class="container" style="margin-bottom: 5%">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body" style="border: 5%">
+                            <h5 class="card-title">{{post.title}}</h5>
+                            <p class="card-text">{{post.short_content}}</p>
+                            <a href="{% url 'details' post.id %}" class="btn btn-primary">Прочети повече</a>
+                            {% if user.is_superuser %}
+                            <a class="btn btn-secondary" href="{% url 'edit' post.id%">Редактирай</a>
+                            <a href="{% url 'delete' post.id %}" class="btn btn-danger">Изтрий</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4"></div>
+            {% endfor %}
+
+        </div>
+    </div>
+</body>
+
+</html>
