@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'news'
+    'news',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -51,6 +52,14 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'zanimalnq.urls'
+
+LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/'
+
+PASSWORD_RESET_DONE_REDIRECT_URL = '/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 TEMPLATES = [
     {
