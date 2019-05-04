@@ -1,10 +1,10 @@
 from django.db import models
-from django.contrib.auth.models import User, Group
-
+from django.conf import settings
+from accounts.models import User
 
 
 class Comment(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='user', verbose_name='потребител')
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='потребител', on_delete=models.CASCADE, related_name='user')
     content = models.TextField('съдържание', max_length=640)
     pub_date = models.DateTimeField('дата на създаване', auto_now=True)
 
@@ -16,11 +16,12 @@ class Comment(models.Model):
         return f'{self.user}\n{self.content:.30}'
 
 
+# TODO fix relations
 class Post(models.Model):
     title = models.CharField('заглавие', max_length=50)
     pub_date = models.DateField('дата на публикуване', auto_now_add=True)
     content = models.TextField('съдържание')
-    comments = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='posts', blank=True, null=True, verbose_name='коментари')
+    comments = models.OneToOneField(Comment, verbose_name='коментари', on_delete=models.CASCADE, related_name='posts', blank=True, null=True)
 
     class Meta:
         verbose_name = 'публикация'

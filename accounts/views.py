@@ -1,7 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.views.generic import DetailView, CreateView
-from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.conf import settings
 from django.http import HttpResponseRedirect
+
+from .forms import SignUpForm
 
 
 def redirect_to_user_details(request):
@@ -11,12 +13,14 @@ def redirect_to_user_details(request):
 
 
 class UserDetails(DetailView):
-    model = User
+    model = settings.AUTH_USER_MODEL
     template_name = 'user-details.html'
     context_object_name = 'user'
 
 
 class SignUp(CreateView):
-    form_class = UserCreationForm
-    success_url = '/accounts/login/'
+
+    model = get_user_model
+    form_class = SignUpForm
+    success_url = '/'
     template_name = 'signup.html'

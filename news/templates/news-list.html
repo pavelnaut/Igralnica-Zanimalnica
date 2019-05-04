@@ -1,32 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'index.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Начало</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-
-<body>
+{% block body %}
     <div class="container" style="margin-top: 2%">
 
-
-
         <div class="row">
-            <div class="col-lg-3"></div>
-            <div class="col-lg-6">
-                {% if user.is_authenticated %}
-                <a href="{% url 'logout' %}" class="btn btn-danger" style="margin-bottom: 2%">Отпиши се</a>
-                {% if user.is_superuser %}
-                <a href="/admin/" class="btn btn-warning" style="margin-bottom: 2%">Админ панел</a>
-                {% endif %}
-                {% else %}
-                <a href="{% url 'login' %}" class="btn btn-success" style="margin-bottom: 2%" >Впиши се</a>
-                <a href="{% url 'signup' %}" class="btn btn-primary" style="margin-bottom: 2%">Регистрирай се</a>
-                {% endif %}
-            </div>
-            <div class="col-lg-3"></div>
             {% for post in posts %}
             <div class="col-lg-4"></div>
             <div class="col-lg-4">
@@ -76,6 +53,4 @@
 
         </div>
     </div>
-</body>
-
-</html>
+{% endblock %}

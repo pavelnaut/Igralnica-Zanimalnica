@@ -6,27 +6,28 @@ from .models import Post
 
 class NewsList(ListView):
     model = Post
-    template_name = 'index.html'
+    template_name = 'news-list.html'
     context_object_name = 'posts'
     paginate_by = 3
 
 
-
 class NewsDetail(DetailView):
     model = Post
-    template_name = 'details.html'
+    template_name = 'news-details.html'
 
 
 class NewsEdit(UpdateView):
     model = Post
-    success_url = 'details.html'
+    success_url = '/'
+    template_name = 'details.html'
 
 
 class NewsDelete(DeleteView):
     model = Post
-    success_url = 'index.html'
+    success_url = '/'
+    template_name = 'delete.html'
 
 
 class NewsCreate(CreateView):
     model = Post
-    success_url = 'index.html'
+    success_url = '/'
