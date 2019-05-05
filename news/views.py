@@ -1,7 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth import views
 from django.views.generic import ListView, DetailView, UpdateView, DeleteView, CreateView
-from .models import Post
+
+from .models import Post, Comment
+
 
 
 class NewsList(ListView):
@@ -19,13 +21,15 @@ class NewsDetail(DetailView):
 class NewsEdit(UpdateView):
     model = Post
     success_url = '/'
-    template_name = 'details.html'
+    template_name = 'news-edit.html'
+    #form_class = ...
 
 
+# TODO permissions
 class NewsDelete(DeleteView):
     model = Post
     success_url = '/'
-    template_name = 'delete.html'
+    template_name = 'news-delete.html'
 
 
 class NewsCreate(CreateView):

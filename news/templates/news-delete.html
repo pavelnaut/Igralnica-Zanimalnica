@@ -1,24 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Delete Animal</title>
-    <link rel="stylesheet"
-          href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous">
-</head>
-<body>
+<title>Изтрий новина</title>
+{% extends 'index.html' %}
+
+{% block body %}
 
     <form method="post">
         {% csrf_token %}
-        <h1>Are you sure you want to delete {{post.title}}</h1>
+        <h1>Сигурни ли сте, че искате да изтриете:</h1>
+            {{post.title}}
         <div class="row">
 
-                <input type="submit" class="btn btn-danger" value="Confirm">
-                <a class="btn btn-primary" href="{% url 'index' %}">Начало</a>
+                <input type="submit" class="btn btn-danger" value="Да, изтрий го!">
+                <a class="btn btn-primary" href="{% url 'index' %}">Размислих, върни ме назад.</a>
         </div>
 </div>
     </form>
-</body>
-</html>
+{% endblock %}
