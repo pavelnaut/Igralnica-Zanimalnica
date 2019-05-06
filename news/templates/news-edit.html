@@ -2,16 +2,22 @@
 {% extends 'index.html' %}
 
 {% block body %}
+{% if user.is_superuser %}
 <div class="container">
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
-            <h1>{{post.title}}</h1>
-            <h2>{{post.content}}</h2>
-            <h2>{{post.comments}}</h2>
-            <h4>{{post.pub_date}}</h4>
-        </div>
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button class="btn btn-primary" type="submit">Публикувай</button>
+        </form>
+            </div>
         <div class="col-lg-2"></div>
     </div>
 </div>
+{% else %}
+{% include 'permission_denied.html' %}
+{% endif %}
 {% endblock %}
+

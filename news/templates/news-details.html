@@ -2,16 +2,35 @@
 {% extends 'index.html' %}
 
 {% block body %}
+
 <div class="container">
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-8">
             <h1>{{post.title}}</h1>
             <h2>{{post.content}}</h2>
-            <h2>{{post.comments}}</h2>
             <h4>{{post.pub_date}}</h4>
+            <div class="container" style="margin-top: 2%">
+                {% for comment in comments %}
+                <div class="card" style="width: 20rem;">
+                    <div class="card-body" style="border: 5%">
+                        <h5 class="card-title">{{comment.user}}</h5>
+                        <p class="card-text">{{comment.content}}</p>
+                        <p class="card-text">{{comment.pub_date}}</p>
+                        {% if comment.user == user %}
+                        <a href="{% url 'edit_comment' comment.pk %}?next={{request.path}}" class="btn btn-success">Редактирай</a>
+                        {% endif %}
+                        {% if user.is_superuser or comment.user == user %}
+                        <a href="{% url 'delete_comment' comment.pk %}?next={{request.path}}" class="btn btn-danger">Изтрий</a>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
         </div>
         <div class="col-lg-2"></div>
     </div>
 </div>
+
+{% include 'comment.html' %}
 {% endblock %}

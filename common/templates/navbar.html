@@ -1,4 +1,6 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom:2%">
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: white;" >
+  <img src="{% static 'logo.jpg' %}" height="40" alt="Logo">
   <a class="navbar-brand" href="/">Начало</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
           aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -37,6 +39,7 @@
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           {% if user.is_superuser %}
             <a class="dropdown-item" href="/admin/">Админ панел</a>
+            <a class="dropdown-item" href="{% url 'create' %}">Добави публикация</a>
           {% endif %}
           <a class="dropdown-item" href="#">Профил</a>
           <a class="dropdown-item" href="{% url 'logout' %}">Отпиши се</a>

@@ -2,16 +2,24 @@
 {% extends 'index.html' %}
 
 {% block body %}
+{% if user.is_superuser %}
 
-    <form method="post">
-        {% csrf_token %}
-        <h1>Сигурни ли сте, че искате да изтриете:</h1>
-            {{post.title}}
-        <div class="row">
+<form method="post">
+    {% csrf_token %}
+    <h1>Сигурни ли сте, че искате да изтриете:</h1>
+    {% if post %}
+    {{ post.title }}
+    {% else %}
+    {{ comment.content }}
+    {% endif %}
+    <div class="row">
+        <input type="submit" class="btn btn-danger" value="Да, изтрий го!">
+        <a class="btn btn-primary" href="{% url 'index' %}">Размислих, върни ме назад.</a>
+    </div>
+    </div>
+</form>
 
-                <input type="submit" class="btn btn-danger" value="Да, изтрий го!">
-                <a class="btn btn-primary" href="{% url 'index' %}">Размислих, върни ме назад.</a>
-        </div>
-</div>
-    </form>
+{% else %}
+{% include 'permission_denied.html' %}
+{% endif %}
 {% endblock %}
