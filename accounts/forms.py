@@ -68,18 +68,9 @@ class SignUpForm(UserCreationForm):
         fields = ('email', 'password1', 'password2', 'first_name', 'last_name', 'kind')
 
 
-class LogInForm(AuthenticationForm):
-    '''
-    Extends the password field only for the translation
-    '''
-    password = forms.CharField(
-        label=_("Парола"),
-        strip=False,
-        widget=forms.PasswordInput,
-    )
+class EditProfileForm(SignUpForm):
 
-    error_messages = {
-        'invalid_login': _(
-            "Моля въведете правилна поща и парола."),
-        'inactive': _("Този профил е блокиран."),
-                      }
+
+
+    model = User
+    fields = ('email', 'password1', 'password2', 'first_name', 'last_name', 'kind')

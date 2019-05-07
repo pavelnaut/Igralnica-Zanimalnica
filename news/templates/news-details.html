@@ -14,7 +14,7 @@
                 {% for comment in comments %}
                 <div class="card" style="width: 20rem;">
                     <div class="card-body" style="border: 5%">
-                        <h5 class="card-title">{{comment.user}}</h5>
+                        <h5 class="card-title">{{comment.user.public_title }}</h5>
                         <p class="card-text">{{comment.content}}</p>
                         <p class="card-text">{{comment.pub_date}}</p>
                         {% if comment.user == user %}

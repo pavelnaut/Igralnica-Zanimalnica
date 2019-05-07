@@ -22,6 +22,6 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
 ]
 
-admin.site.site_header = "Админ панел"
+admin.site.site_header = "Административен павел"  # it's a pun
 admin.site.site_title = "Админ панел"
 admin.site.index_title = "Игралница-Занималница"

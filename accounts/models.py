@@ -26,7 +26,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_active = models.BooleanField(_('активен'), default=True)
     is_staff = models.BooleanField(_('служител'), default=False)
 
-
     objects = UserManager()
 
     USERNAME_FIELD = 'email'
@@ -35,6 +34,13 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = _('потребител')
         verbose_name_plural = _('потребители')
+
+    def public_title(self):
+        '''
+        Returns the first_name plus the last_name plus the title, with a space in between.
+        '''
+        full_title = '%s %s' % (self.get_full_name(), self.get_kind_display())
+        return full_title.strip()
 
     def get_full_name(self):
         '''

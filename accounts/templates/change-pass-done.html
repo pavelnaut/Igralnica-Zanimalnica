@@ -1,28 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-<body>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-6">
-            <img style="width:100%" src="https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2015/03/mobile-security-laptop-fingerprint-730x442.jpg" alt="">
-        </div>
-        <div class="col-lg-6">
-                <form style="border: 1px solid grey; margin: 0% 0%; padding: 10% 5%" method="post">
-                                    <h2>Password changed successfully!</h2>
+<title>Успешна промяна на паролата</title>
+{% extends 'index.html' %}
 
-                    {% csrf_token %}
-                  {{ form.as_p }}
+{% block body %}
+<div id="content" class="colM">
+    <h1>Паролата е сменена успешно</h1>
 
-                    <br>
-                    <span>Want to go back? <a href="{% url 'login' %}" style="color:orange">Login</a></span>
-                </form>
-        </div>
+<p>Паролата ви е променена.</p>
+
+
+    <br class="clear">
     </div>
-</div>
-</body>
-</html>
+{% endblock %}

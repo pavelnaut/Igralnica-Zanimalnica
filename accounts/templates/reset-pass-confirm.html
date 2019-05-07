@@ -1,0 +1,22 @@
+<title>Въведете нова парола</title>
+{% extends 'index.html' %}
+
+{% block body %}
+    <div id="content" class="colM">
+
+        <h1>Въведете нова парола</h1>
+
+
+<p>Моля, въведете новата парола два пъти, за да може да се потвърди, че сте я написали правилно.</p>
+
+<form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+    <input type="submit" value="Промяна на парола">
+
+</form>
+
+
+        <br class="clear">
+    </div>
+{% endblock %}

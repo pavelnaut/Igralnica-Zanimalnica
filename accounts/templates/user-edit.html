@@ -1,0 +1,12 @@
+<title>Моят профил</title>
+{% extends 'index.html' %}
+
+{% block body %}
+         <h1><span style="font-size: 2rem">Моят профил</span></h1>
+        <form style="border: 1px solid grey; margin: 10% 0%; padding: 10% 5%" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Потвърди</button>
+     </form>
+
+{% endblock %}

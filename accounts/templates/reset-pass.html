@@ -1,0 +1,23 @@
+<title>Нулиране на паролата</title>
+{% extends 'index.html' %}
+
+{% block body %}
+    <div id="content" class="colM">
+
+        <h1>Нова парола</h1>
+
+
+<p>Забравили сте си паролата? Въведете своя имейл адрес по-долу, а ние ще ви изпратим инструкции за създаване на нова.</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+<fieldset class="module aligned">
+
+    <input type="submit" value="Нова парола">
+</fieldset>
+</form>
+
+        <br class="clear">
+    </div>
+{% endblock %}
