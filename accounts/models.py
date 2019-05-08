@@ -5,24 +5,34 @@ from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.utils.translation import ugettext_lazy as _
 
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
+
 from .managers import UserManager
 
 
 # TODO maybe add username
 class User(AbstractBaseUser, PermissionsMixin):
+    '''
+    Avatar field is using django-imagekit in order to strip image's
+    metadata and to resize it to a smaller size. Jpeg format is shit,
+    that's why we use png, even though it's larger in size.
+    '''
     ACADEMIC_CHOICES = (
         ('P', 'Родител'),
         ('S', 'Ученик'),
         ('T', 'Учител'),
         ('G', 'Гост'),
     )
-
     email = models.EmailField(verbose_name='поща', unique=True)
     first_name = models.CharField(_('име'), max_length=30, blank=True)
     last_name = models.CharField(_('фамилия'), max_length=30, blank=True)
     date_joined = models.DateTimeField(_('дата на създаване'), auto_now_add=True)
-    avatar = models.ImageField(_('аватар'), upload_to='common/static/avatars/',
-                               default='common/static/avatars/default.jpg')
+    avatar = ProcessedImageField(verbose_name='аватар',
+                                 upload_to='common/static/avatars/',
+                                 processors=[ResizeToFill(140, 140)],
+                                 format='PNG',
+                                 default='common/static/avatars/default.png')
     kind = models.CharField(_('аз съм'), max_length=1, choices=ACADEMIC_CHOICES, default='G')
     is_active = models.BooleanField(_('активен'), default=True)
     is_staff = models.BooleanField(_('служител'), default=False)
@@ -35,13 +45,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     class Meta:
         verbose_name = _('потребител')
         verbose_name_plural = _('потребители')
-
-    def public_title(self):
-        '''
-        Returns the first_name plus the last_name plus the title, with a space in between.
-        '''
-        full_title = '%s %s' % (self.get_full_name(), self.get_kind_display())
-        return full_title.strip()
 
     def get_full_name(self):
         '''

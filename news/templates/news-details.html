@@ -24,7 +24,12 @@
                         </div>
                         <div class="col-lg-9">
                             <div class="card-body" style="border: 5%">
-                        <h6 class="card-title">{{comment.user.public_title }}</h6>
+                        <h6 class="card-title">{{comment.user.get_full_name }}</h6>
+                                {% if comment.user.is_superuser %}
+                        <h6 class="card-title">Админ</h6>
+                                {% else %}
+                        <h6 class="card-title">{{comment.user.get_kind_display }}</h6>
+                                {% endif %}
                         <p class="card-text">{{comment.content}}</p>
                         <p class="card-text">{{comment.pub_date}}</p>
                         {% if user.is_superuser or comment.user == user %}
