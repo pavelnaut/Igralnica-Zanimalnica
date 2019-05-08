@@ -7,6 +7,7 @@ from . import views
 
 urlpatterns = [
                path('logout/', auth.LogoutView.as_view(), name='logout'),
+               path('profile/', views.redirect_to_user_details, name='redirect-user-details'),
                path('profile/<pk>/', views.UserDetails.as_view(), name='user-details'),
                path('edit/<pk>/', views.UserEdit.as_view(), name='user-edit'),
                path('signup/', views.SignUp.as_view(), name='signup'),

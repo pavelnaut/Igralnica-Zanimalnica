@@ -2,11 +2,24 @@
 {% extends 'index.html' %}
 
 {% block body %}
-         <h1><span style="font-size: 2rem">Моят профил</span></h1>
-        <form style="border: 1px solid grey; margin: 10% 0%; padding: 10% 5%" method="post">
+{% if request.user.pk == user.pk %}
+<div class="container-fluid">
+    <div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6">
+                 <h1>Моят профил</h1>
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
         <button class="btn btn-primary" type="submit">Потвърди</button>
      </form>
 
+          </form>
+    </div>
+    <div class="col-lg-3"></div>
+        </div>
+     </div>
+{% else %}
+{% include 'permission_denied.html' %}
+{% endif %}
 {% endblock %}

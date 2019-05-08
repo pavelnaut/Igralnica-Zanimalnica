@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django import forms
 from django.core.validators import EmailValidator
 from django.utils.translation import ugettext_lazy as _
@@ -53,8 +53,12 @@ class SignUpForm(UserCreationForm):
                                     }
                                 ))
 
-
-    #avatar = forms.ImageField() # <-- csrf problems?
+    avatar = forms.ImageField(label='Аватар', required=False,
+                              widget=forms.FileInput(
+                                  attrs={
+                                      'class': 'form-control-file'
+                                  }
+                              ))
 
     kind = forms.ChoiceField(label='Аз съм', required=False, choices=choices,
                              widget=forms.Select(
@@ -65,12 +69,49 @@ class SignUpForm(UserCreationForm):
 
     class Meta:
         model = User
-        fields = ('email', 'password1', 'password2', 'first_name', 'last_name', 'kind')
+        fields = ('email', 'password1', 'password2', 'first_name', 'last_name', 'kind', 'avatar',)
 
 
-class EditProfileForm(SignUpForm):
+class EditProfileForm(forms.ModelForm):
+    choices = list(User.ACADEMIC_CHOICES)
 
+    email = forms.EmailField(label='Поща', required=True,
+                             validators=[EmailValidator(message="Не е валиден имейл.")],
+                             widget=forms.EmailInput(
+                                 attrs={
+                                     'class': 'form-control'
+                                 }
+                             ))
 
+    first_name = forms.CharField(label='Име', required=False, max_length=32,
+                                 widget=forms.TextInput(
+                                     attrs={
+                                         'class': 'form-control'
+                                     }
+                                 ))
 
-    model = User
-    fields = ('email', 'password1', 'password2', 'first_name', 'last_name', 'kind')
+    last_name = forms.CharField(label='Фамилия', required=False, max_length=32,
+                                widget=forms.TextInput(
+                                    attrs={
+                                        'class': 'form-control'
+                                    }
+                                ))
+
+    avatar = forms.ImageField(label='Аватар', required=False,
+                                 widget=forms.FileInput(
+                                     attrs={
+                                         'class': 'form-control-file',
+
+                                     }
+                                 ))
+
+    kind = forms.ChoiceField(label='Аз съм', required=False, choices=choices,
+                             widget=forms.Select(
+                                 attrs={
+                                     'class': 'form-control'
+                                 }
+                             ))
+
+    class Meta:
+        model = User
+        fields = ('email', 'first_name', 'last_name', 'kind', 'avatar',)

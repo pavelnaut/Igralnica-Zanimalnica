@@ -21,7 +21,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     first_name = models.CharField(_('име'), max_length=30, blank=True)
     last_name = models.CharField(_('фамилия'), max_length=30, blank=True)
     date_joined = models.DateTimeField(_('дата на създаване'), auto_now_add=True)
-    avatar = models.ImageField(_('аватар'), upload_to='avatars/', null=True, blank=True)
+    avatar = models.ImageField(_('аватар'), upload_to='common/static/avatars/',
+                               default='common/static/avatars/default.jpg')
     kind = models.CharField(_('аз съм'), max_length=1, choices=ACADEMIC_CHOICES, default='G')
     is_active = models.BooleanField(_('активен'), default=True)
     is_staff = models.BooleanField(_('служител'), default=False)
@@ -60,3 +61,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         Sends an email to this User.
         '''
         send_mail(subject, message, from_email, [self.email], **kwargs)
+
+    def avatar_source(self):
+        return f"/avatars/{str(self.avatar).split('/')[3]}"

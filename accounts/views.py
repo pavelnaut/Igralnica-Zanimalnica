@@ -3,6 +3,7 @@ from django.views.generic import CreateView, UpdateView, DetailView
 from django.contrib.auth.views import LoginView
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import AuthenticationForm
+from django.views.generic.detail import DetailView
 
 from .forms import SignUpForm, EditProfileForm
 from .models import User
@@ -10,18 +11,17 @@ from .models import User
 # do I need this?
 def redirect_to_user_details(request):
     if request.user.is_authenticated:
-        url = f"/accounts/profile/{request.user.pk}/"
+        url = f"{request.user.pk}/"
         return HttpResponseRedirect(redirect_to=url)
+    return HttpResponseRedirect(redirect_to="/")
 
 
-# TODO fix authentication
 class UserEdit(UpdateView):
     model = User
     template_name = 'user-edit.html'
     context_object_name = 'user'
-    form_class = SignUpForm
-    success_url = '/'
-
+    form_class = EditProfileForm
+    success_url = '/accounts/profile/'
 
 
 class UserDetails(DetailView):

@@ -6,8 +6,12 @@ from django.http import HttpResponseRedirect, HttpResponse
 from .models import Post, Comment
 from .forms import CommentForm, PostForm
 
-from accounts.models import User
 
+# how to make this work?
+def redirect_to_commented_post(request):
+    if request.user.is_authenticated:
+        url = f"/news/details/{request.post.id}/"
+        return HttpResponseRedirect(redirect_to=url)
 
 # so far don't need this?
 def has_access_to_modify(current_user, comment):
@@ -34,8 +38,7 @@ class NewsDetail(DetailView):
     Not only does it show the full Post, but also shows all
     the comments belonging to it. Content is public, but only
     registered users can add new comments. Each user can edit/delete
-    their own comment. Admins can delete every comment but can't
-    and shouldn't edit them(that would be voice manipulation).
+    their own comment. Admins can do whatever they want.
     '''
     model = Post
     template_name = 'news-details.html'
@@ -82,6 +85,7 @@ class CommentDelete(DeleteView):
 # Only Admins have permission for rest of the views
 class NewsEdit(UpdateView):
     model = Post
+    context_object_name = 'comment'
     form_class = PostForm
     success_url = '/'
     template_name = 'news-edit.html'

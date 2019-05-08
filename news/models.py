@@ -16,7 +16,7 @@ class Post(models.Model):
         verbose_name_plural = 'публикации'
 
     def short_content(self):
-        return f"{self.content:.50}..."
+        return f"{self.content:.500}..."
 
     def __str__(self):
         return f"{self.title:.20}..."
