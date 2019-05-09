@@ -1,9 +1,7 @@
-
 from django.db import models
 from django.core.mail import send_mail
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
-from django.utils.translation import ugettext_lazy as _
 
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
@@ -11,7 +9,6 @@ from imagekit.processors import ResizeToFill
 from .managers import UserManager
 
 
-# TODO maybe add username
 class User(AbstractBaseUser, PermissionsMixin):
     '''
     Avatar field is using django-imagekit in order to strip image's
@@ -25,17 +22,17 @@ class User(AbstractBaseUser, PermissionsMixin):
         ('G', 'Гост'),
     )
     email = models.EmailField(verbose_name='поща', unique=True)
-    first_name = models.CharField(_('име'), max_length=30, blank=True)
-    last_name = models.CharField(_('фамилия'), max_length=30, blank=True)
-    date_joined = models.DateTimeField(_('дата на създаване'), auto_now_add=True)
+    first_name = models.CharField(verbose_name='име', max_length=30, blank=True)
+    last_name = models.CharField(verbose_name='фамилия', max_length=30, blank=True)
+    date_joined = models.DateTimeField(verbose_name='дата на създаване', auto_now_add=True)
     avatar = ProcessedImageField(verbose_name='аватар',
                                  upload_to='common/static/avatars/',
                                  processors=[ResizeToFill(140, 140)],
                                  format='PNG',
                                  default='common/static/avatars/default.png')
-    kind = models.CharField(_('аз съм'), max_length=1, choices=ACADEMIC_CHOICES, default='G')
-    is_active = models.BooleanField(_('активен'), default=True)
-    is_staff = models.BooleanField(_('служител'), default=False)
+    kind = models.CharField(verbose_name='аз съм', max_length=1, choices=ACADEMIC_CHOICES, default='G')
+    is_active = models.BooleanField(verbose_name='активен', default=True)
+    is_staff = models.BooleanField(verbose_name='служител', default=False)
 
     objects = UserManager()
 
@@ -43,8 +40,8 @@ class User(AbstractBaseUser, PermissionsMixin):
     REQUIRED_FIELDS = []
 
     class Meta:
-        verbose_name = _('потребител')
-        verbose_name_plural = _('потребители')
+        verbose_name = 'потребител'
+        verbose_name_plural = 'потребители'
 
     def get_full_name(self):
         '''

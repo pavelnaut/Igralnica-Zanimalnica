@@ -20,6 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('news.urls')),
     path('accounts/', include('accounts.urls')),
+    path('pictures/', include('pictures.urls')),
 ]
 
 admin.site.site_header = "Административен павел"  # it's a pun
