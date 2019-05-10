@@ -1,9 +1,22 @@
 from django import forms
+from django.core.files.uploadedfile import SimpleUploadedFile
+from django.forms import formset_factory
 
+from multiupload.fields import MultiUploadMetaField
 from multiupload.fields import MultiImageField
 
-from .models import Album
-from news.models import Post
+from .models import Album, Picture
+
+class PictureForm(forms.ModelForm):
+
+    picture = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'form-control-file'}))
+
+    class Meta:
+        model = Picture
+        fields = ['album', 'picture',]
+
+
+#AlbumFormSet = formset_factory(AlbumForm)
 
 
 class AlbumForm(forms.ModelForm):
@@ -16,26 +29,12 @@ class AlbumForm(forms.ModelForm):
 
                               ))
 
-    files = MultiImageField(min_num=1, max_num=50, label='Снимки', required=True,
-                                 widget=forms.FileInput(
-                                     attrs={
-                                         'class': 'form-control-file',
-
-                                     }
-                                 ))
 
     is_visible = forms.CheckboxInput()
 
-
+    #pictures = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'form-control-file'}))
 
     class Meta:
         model = Album
-        fields = ['title', 'is_visible']
+        fields = ['title', 'is_visible',]
 
-    #files = MultiImageField(min_num=1, max_num=50, max_file_size=1024*1024*5)
-
-    def save(self, commit=True):
-        instance = super(AlbumForm, self).save(commit)
-        for each in self.cleaned_data['files']:
-            Post.objects.create(picture=each, album=instance)
-        return instance
