@@ -1,0 +1,29 @@
+<title>Галерия</title>
+{% extends 'index.html' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+
+        {% for picture in pictures %}
+        <div class="col-lg-3">
+                <div class="container" style="margin-bottom: 5%">
+                    <div class="card" style="width: 40rem;">
+                        <div class="card-body" style="border: 5%">
+                            <h5 class="card-title">{{picture.picture}}</h5>
+                            {% load static %}
+                            <img src="{% static picture.pic_source %}" alt="Album image" width="140" height="140">
+
+                                <a href="" class="btn btn-primary">Още</a>
+                                {% if user.is_superuser %}
+
+                                <a href="" class="btn btn-danger">Изтрий</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

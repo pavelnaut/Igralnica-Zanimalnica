@@ -1,0 +1,30 @@
+<title>Галерия</title>
+{% extends 'index.html' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+
+        {% for album in albums %}
+        <div class="col-lg-3">
+                <div class="container" style="margin-bottom: 5%">
+                    <div class="card" style="width: 40rem;">
+                        <div class="card-body" style="border: 5%">
+                            <h5 class="card-title">{{album.title}}</h5>
+                                <a href="{% url 'album' album.pk %}" class="btn btn-primary">Още</a>
+
+                                    {% if user.is_superuser %}
+                                     <div class="row">
+                                         <a href="{% url 'add_pictures' album.pk %}" class="btn btn-secondary">Добави снимка</a>
+                                         <a href="" class="btn btn-secondary">Редактирай</a>
+                                         <a href="" class="btn btn-danger">Изтрий</a>
+                                     </div>
+                                    {% endif %}
+                            </div>
+                        </div>
+                    </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
