@@ -20,7 +20,7 @@ class Album(models.Model):
 
 class Picture(models.Model):
     album = models.ForeignKey(Album, verbose_name='албум', on_delete=models.CASCADE, related_name='pictures')
-    picture = models.ImageField(verbose_name='снимка', upload_to='gallery/', blank=True, null=True)
+    picture = models.ImageField(verbose_name='снимка', upload_to='common/static/gallery/', blank=True, null=True)
     pub_date = models.DateField('дата на качване', auto_now_add=True)
 
     class Meta:
@@ -28,7 +28,8 @@ class Picture(models.Model):
         verbose_name_plural = 'снимки'
 
     def pic_source(self):
-        return f"/{str(self.picture)}"
+        image_name = str(self.picture).split('/')[3]
+        return f"gallery/{image_name}"
 
     def __str__(self):
         return f'{self.album} - {str(self.picture)}'

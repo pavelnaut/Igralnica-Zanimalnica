@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic.detail import DetailView
 
+
 from .forms import SignUpForm, EditProfileForm
 from .models import User
 

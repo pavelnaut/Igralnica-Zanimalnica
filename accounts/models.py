@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.mail import send_mail
+from django.conf import settings
 from django.contrib.auth.models import PermissionsMixin
 from django.contrib.auth.base_user import AbstractBaseUser
 
@@ -56,7 +57,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         '''
         return self.first_name
 
-    def email_user(self, subject, message, from_email=None, **kwargs):
+    def email_user(self, subject, message, from_email=settings.EMAIL_HOST_USER, **kwargs):
         '''
         Sends an email to this User.
         '''
