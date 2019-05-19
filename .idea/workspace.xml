@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="98de1306-4474-45d7-847c-d5c9e3a49a9e" name="Default Changelist" comment="Postponing multiple file uploads indefinitely">
+    <list default="true" id="98de1306-4474-45d7-847c-d5c9e3a49a9e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/apps.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/apps.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/templates/application.html" beforeDir="false" afterPath="$PROJECT_DIR$/common/templates/application.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/templates/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/common/templates/navbar.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/common/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/news/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/news/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/zanimalnq/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/zanimalnq/settings.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,7 +36,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/common/admin.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
@@ -58,11 +48,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/zanimalnq/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-51">
-              <caret line="27" column="17" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
+            <state relative-caret-position="340">
+              <caret line="71" selection-start-line="71" selection-end-line="71" />
             </state>
           </provider>
         </entry>
@@ -181,11 +171,11 @@
         <option value="$PROJECT_DIR$/news/views.py" />
         <option value="$PROJECT_DIR$/common/views.py" />
         <option value="$PROJECT_DIR$/common/models.py" />
-        <option value="$PROJECT_DIR$/zanimalnq/settings.py" />
         <option value="$PROJECT_DIR$/common/__init__.py" />
         <option value="$PROJECT_DIR$/common/apps.py" />
         <option value="$PROJECT_DIR$/common/templates/navbar.html" />
         <option value="$PROJECT_DIR$/accounts/models.py" />
+        <option value="$PROJECT_DIR$/zanimalnq/settings.py" />
       </list>
     </option>
   </component>
@@ -203,7 +193,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -211,10 +200,16 @@
               <item name="zanimalnq" type="b2602c69:ProjectViewProjectNode" />
               <item name="zanimalnq" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="zanimalnq" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zanimalnq" type="462c0819:PsiDirectoryNode" />
+              <item name="zanimalnq" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -368,7 +363,14 @@
       <option name="project" value="LOCAL" />
       <updated>1558210912614</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Application form that sends emails">
+      <created>1558283516002</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1558283516002</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TodoView">
@@ -384,7 +386,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17833553" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17833553" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -394,9 +396,9 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32956153" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.33097595" />
+      <window_info active="true" anchor="bottom" id="Version Control" order="7" visible="true" weight="0.33097595" />
       <window_info anchor="bottom" id="Inspection Results" order="8" weight="0.32956153" />
-      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49867898" visible="true" weight="0.32107496" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49867898" weight="0.32107496" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.501321" side_tool="true" weight="0.32107496" />
       <window_info anchor="bottom" id="Python Console" order="11" weight="0.32956153" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -466,7 +468,8 @@
     <MESSAGE value="No luck making picture gallery using multiupload so far" />
     <MESSAGE value="Postponing multiple file uploads indefinitely" />
     <MESSAGE value="application form with real emails halfway there" />
-    <option name="LAST_COMMIT_MESSAGE" value="application form with real emails halfway there" />
+    <MESSAGE value="Application form that sends emails" />
+    <option name="LAST_COMMIT_MESSAGE" value="Application form that sends emails" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/pictures/templates/add-pictures.html">
@@ -827,13 +830,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/zanimalnq/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-51">
-          <caret line="27" column="17" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/common/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -841,6 +837,13 @@
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/zanimalnq/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
         </state>
       </provider>
     </entry>
