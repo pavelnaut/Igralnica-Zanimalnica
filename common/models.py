@@ -13,7 +13,6 @@ class ChildApplication(models.Model):
         ('IV', 'Четвърти клас'),
         ('P', 'Предучилищна'),
     )
-    user = models.ForeignKey(User, verbose_name='поща', on_delete=models.CASCADE, related_name='applications')
     parent = models.CharField(verbose_name='родител', max_length=30)
     child = models.CharField(verbose_name='дете', max_length=30)
     school = models.CharField(verbose_name='училище', max_length=50)
@@ -25,3 +24,7 @@ class ChildApplication(models.Model):
 
     def __str__(self):
         return f"{self.parent}: {self.child}"
+
+    class Meta:
+        verbose_name = 'заявление'
+        verbose_name_plural = 'заявления'

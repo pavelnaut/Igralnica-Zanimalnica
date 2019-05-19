@@ -1,6 +1,7 @@
 from django import forms
 
 from .models import ChildApplication
+from accounts.models import User
 
 from phonenumber_field.formfields import PhoneNumberField
 from bootstrap_datepicker_plus import DatePickerInput
@@ -59,4 +60,4 @@ class ApplicationForm(forms.ModelForm):
 
     class Meta:
         model = ChildApplication
-        fields = ('parent', 'child', 'school', 'group', 'period_from', 'period_to', 'phone', 'extra',)
+        fields = ('__all__')

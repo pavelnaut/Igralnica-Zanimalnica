@@ -51,14 +51,14 @@ class NewsDetail(DetailView):
 
     def post(self, request, pk):
         url = f'/news/details/{self.get_object().id}/'
-        post_values = self.get_object().id
-        form = CommentForm(post_values)
+        data = request.POST.copy()
+        form = CommentForm(data)
         user = self.request.user
 
         if form.is_valid() and user.is_authenticated:
-            post_values['post'] = self.get_object()
+            data['post'] = self.get_object()
             comment = Comment(
-                content=post_values['content'],
+                content=data['content'],
                 post=self.get_object(),
                 user=self.request.user
             )
