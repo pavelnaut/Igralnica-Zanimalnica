@@ -74,6 +74,8 @@ PASSWORD_RESET_DONE_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'accounts.User'
 
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

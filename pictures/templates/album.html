@@ -3,27 +3,41 @@
 
 {% block body %}
 <div class="container">
-    <div class="row">
 
-        {% for picture in pictures %}
-        <div class="col-lg-3">
-                <div class="container" style="margin-bottom: 5%">
-                    <div class="card" style="width: 40rem;">
+        {% if user.is_superuser %}
+        <div class="col-lg-6"></div>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button class="btn btn-primary" type="submit">Публикувай</button>
+            </form>
+        <div class="col-lg-6"></div>
+        {% endif %}
+    </div>
+        <div class="container">
+            <div class="row">
+            {% load static %}
+            {% for picture in pictures %}
+                <div class="col-lg-4">
+                    <div class="container" style="margin-bottom: 5%">
+                    <div class="card" style="width: 18rem;">
+              <img src="{% static picture.pic_source %}" class="card-img-top" style="height: 18rem;">
+
+                  {% if user.is_superuser %}
                         <div class="card-body" style="border: 5%">
-                            <h5 class="card-title">{{picture.picture}}</h5>
-                            {% load static %}
-                            <img src="{% static picture.pic_source %}" alt="Album image" width="140" height="140">
-
-                                <a href="" class="btn btn-primary">Още</a>
-                                {% if user.is_superuser %}
-
-                                <a href="" class="btn btn-danger">Изтрий</a>
-                                {% endif %}
+                  <center>
+                  <a href="" class="btn btn-danger">Изтрий</a>
+                  </center>
                             </div>
-                        </div>
-                    </div>
+                  {% endif %}
+
+              </div>
+            </div>
         </div>
+
         {% endfor %}
     </div>
-</div>
+
+
+
 {% endblock %}

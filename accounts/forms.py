@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.contrib.auth.forms import UserCreationForm, UserChangeForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 from django import forms
 from django.core.validators import EmailValidator
 from django.utils.translation import ugettext_lazy as _
@@ -115,3 +115,13 @@ class EditProfileForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ('email', 'first_name', 'last_name', 'kind', 'avatar',)
+
+
+class LoginForm(AuthenticationForm):
+
+    username = UsernameField(label='Поща', widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control'}))
+    password = forms.CharField(
+        label=_("Password"),
+        strip=False,
+        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
+                                )

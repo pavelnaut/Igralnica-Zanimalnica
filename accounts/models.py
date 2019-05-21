@@ -34,9 +34,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     kind = models.CharField(verbose_name='аз съм', max_length=1, choices=ACADEMIC_CHOICES, default='G')
     is_active = models.BooleanField(verbose_name='активен', default=True)
     is_staff = models.BooleanField(verbose_name='служител', default=False)
-    is_staff = models.PositiveIntegerField(verbose_name='служител', validators=[ MaxValueValidator(100),
-            MinValueValidator(1)
-        ])
 
     objects = UserManager()
 

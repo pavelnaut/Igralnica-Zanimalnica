@@ -52,7 +52,7 @@ class ApplicationForm(forms.ModelForm):
 
     extra = forms.CharField(label='Допълнителна информация', required=False,
                             max_length=500,
-                                widget=forms.TextInput(
+                                widget=forms.Textarea(
                                     attrs={
                                         'class': 'form-control'
                                     }

@@ -10,7 +10,7 @@ from .models import Album, Picture
 
 class PictureForm(forms.ModelForm):
 
-    picture = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'form-control-file'}))
+    picture = forms.ImageField(label='Добави снимки', widget=forms.FileInput(attrs={'multiple': True, 'class': 'form-control'}))
 
     class Meta:
         model = Picture
@@ -33,7 +33,7 @@ class AlbumForm(forms.ModelForm):
 
     is_visible = forms.CheckboxInput()
 
-    #pictures = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'form-control-file'}))
+    pictures = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'form-control-file'}))
 
     class Meta:
         model = Album

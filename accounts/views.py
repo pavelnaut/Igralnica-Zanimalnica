@@ -6,7 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.views.generic.detail import DetailView
 
 
-from .forms import SignUpForm, EditProfileForm
+from .forms import SignUpForm, EditProfileForm, LoginForm
 from .models import User
 
 # do I need this?
@@ -40,6 +40,6 @@ class SignUp(CreateView):
 
 class LogIn(LoginView):
     model = User
-    form_class = AuthenticationForm
+    form_class = LoginForm
     success_url = '/'
     template_name = 'login.html'
