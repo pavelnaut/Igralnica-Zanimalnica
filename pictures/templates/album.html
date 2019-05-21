@@ -2,18 +2,22 @@
 {% extends 'index.html' %}
 
 {% block body %}
+{% if album.is_visible or user.is_superuser %}
 <div class="container">
-
         {% if user.is_superuser %}
-        <div class="col-lg-6"></div>
+    <div class="row">
+        <div class="col-lg-5"></div>
+        <div class="col-lg-2">
             <form action="" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{form.as_p}}
                 <button class="btn btn-primary" type="submit">Публикувай</button>
             </form>
-        <div class="col-lg-6"></div>
-        {% endif %}
+        </div>
+        <div class="col-lg-5"></div>
     </div>
+        {% endif %}
+</div>
         <div class="container">
             <div class="row">
             {% load static %}
@@ -26,7 +30,7 @@
                   {% if user.is_superuser %}
                         <div class="card-body" style="border: 5%">
                   <center>
-                  <a href="" class="btn btn-danger">Изтрий</a>
+                  <a href="{% url 'delete_picture' picture.pk%}" class="btn btn-danger">Изтрий</a>
                   </center>
                             </div>
                   {% endif %}
@@ -38,6 +42,7 @@
         {% endfor %}
     </div>
 
-
-
+{% else %}
+{% include 'permission_denied.html' %}
+{% endif %}
 {% endblock %}

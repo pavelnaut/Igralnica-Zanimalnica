@@ -1,6 +1,6 @@
 from django.views.generic.edit import FormView
-from django.views.generic import CreateView, ListView, DetailView
-
+from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
+from django.core.validators import validate_image_file_extension
 
 from .forms import AlbumForm, PictureForm
 from .models import Album, Picture
@@ -12,8 +12,34 @@ from django.shortcuts import render
 class AlbumCreate(CreateView):
     model = Album
     form_class = AlbumForm
+    success_url = '/pictures/'
     template_name = 'add-pictures.html'
-    success_url = f'/pictures/gallery/'
+
+
+class PictureCreate(FormView):
+    form_class = PictureForm
+    model = Picture
+    template_name = 'add-pictures.html'
+    success_url = '/pictures/'
+
+
+class AlbumDelete(DeleteView):
+    model = Album
+    success_url = '/pictures/'
+    template_name = 'news-delete.html'
+
+
+class PictureDelete(DeleteView):
+    model = Picture
+    success_url = '/pictures/'
+    template_name = 'news-delete.html'
+
+
+class AlbumEdit(UpdateView):
+    model = Album
+    form_class = AlbumForm
+    success_url = '/pictures/'
+    template_name = 'add-album.html'
 
 
 class AlbumList(ListView):
@@ -21,12 +47,13 @@ class AlbumList(ListView):
     template_name = 'gallery.html'
     context_object_name = 'albums'
 
+    def get_queryset(self):
+        if self.request.user.is_superuser:
+            return Album.objects.all().order_by('-pub_date', '-pk')
+        return Album.objects.all().order_by('-pub_date', '-pk').filter(is_visible=True)
 
-class PictureCreate(FormView):
-    form_class = PictureForm
-    model = Picture
-    template_name = 'add-pictures.html'
-    success_url = '/'
+
+
 
 
 class AlbumDetail(DetailView):
@@ -36,23 +63,25 @@ class AlbumDetail(DetailView):
     form_class = PictureForm
 
     def get_context_data(self, *, object_list=None, **kwargs):
-        context = super(AlbumDetail, self).get_context_data(**kwargs)
-        context['pictures'] = Picture.objects.all().filter(album=self.get_object())
-        context['form'] = PictureForm()
-        return context
+        if self.get_object().is_visible or self.request.user.is_superuser:
+            context = super(AlbumDetail, self).get_context_data(**kwargs)
+            context['pictures'] = Picture.objects.all().filter(album=self.get_object())
+            context['form'] = PictureForm()
+            return context
 
     def post(self, request, pk):
         url = f'/pictures/album/{self.get_object().id}/'
         files = request.FILES.getlist('picture')
+        album = self.get_object()
         user = self.request.user
-        if user.is_superuser:
+        if files and user.is_superuser:
             for pic in files:
+                # to do: validate
                 picture = Picture(
-                    album=self.get_object(),
-                    picture= pic,
+                    album=album,
+                    picture=pic,
                 )
-                if pic:
-                    picture.save()
+                picture.save()
             return HttpResponseRedirect(url)
         else:
             return HttpResponseBadRequest()

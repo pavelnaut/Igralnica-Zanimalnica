@@ -1,16 +1,17 @@
 from django import forms
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.forms import formset_factory
+from django.core.validators import FileExtensionValidator, validate_image_file_extension
 
-from multiupload.fields import MultiUploadMetaField
-from multiupload.fields import MultiImageField
 
 from .models import Album, Picture
 
 
+
+
 class PictureForm(forms.ModelForm):
 
-    picture = forms.ImageField(label='Добави снимки', widget=forms.FileInput(attrs={'multiple': True, 'class': 'form-control'}))
+    picture = forms.ImageField(label='Добави снимки', widget=forms.FileInput(attrs={'multiple': True, 'class': 'form-control-file'}))
 
     class Meta:
         model = Picture
@@ -32,8 +33,6 @@ class AlbumForm(forms.ModelForm):
 
 
     is_visible = forms.CheckboxInput()
-
-    pictures = forms.ImageField(widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'form-control-file'}))
 
     class Meta:
         model = Album

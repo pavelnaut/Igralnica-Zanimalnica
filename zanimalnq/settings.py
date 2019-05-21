@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'imagekit',
-    'multiupload',
     'phonenumber_field',
     'bootstrap_datepicker_plus',
 
@@ -73,7 +72,6 @@ LOGOUT_REDIRECT_URL = '/'
 PASSWORD_RESET_DONE_REDIRECT_URL = '/'
 
 AUTH_USER_MODEL = 'accounts.User'
-
 
 
 TEMPLATES = [
