@@ -1,12 +1,9 @@
 from django.views.generic.edit import FormView
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
-from django.core.validators import validate_image_file_extension
+from django.http import HttpResponseRedirect, HttpResponseBadRequest
 
 from .forms import AlbumForm, PictureForm
 from .models import Album, Picture
-
-from django.http import HttpResponseRedirect, HttpResponseBadRequest
-from django.shortcuts import render
 
 
 class AlbumCreate(CreateView):
@@ -26,13 +23,13 @@ class PictureCreate(FormView):
 class AlbumDelete(DeleteView):
     model = Album
     success_url = '/pictures/'
-    template_name = 'news-delete.html'
+    template_name = 'pictures-delete.html'
 
 
 class PictureDelete(DeleteView):
     model = Picture
     success_url = '/pictures/'
-    template_name = 'news-delete.html'
+    template_name = 'pictures-delete.html'
 
 
 class AlbumEdit(UpdateView):
@@ -47,13 +44,12 @@ class AlbumList(ListView):
     template_name = 'gallery.html'
     context_object_name = 'albums'
 
+    # public albums visible to all,
+    # hidden albums visible to admins only
     def get_queryset(self):
         if self.request.user.is_superuser:
             return Album.objects.all().order_by('-pub_date', '-pk')
         return Album.objects.all().order_by('-pub_date', '-pk').filter(is_visible=True)
-
-
-
 
 
 class AlbumDetail(DetailView):

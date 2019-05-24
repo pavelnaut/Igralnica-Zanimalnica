@@ -2,7 +2,7 @@
 {% extends 'index.html' %}
 
 {% block body %}
-{% if user.is_superuser %}
+{% if user.is_superuser or comment.user == user %}
 
 <form method="post">
     {% csrf_token %}
@@ -15,7 +15,6 @@
     <div class="row">
         <input type="submit" class="btn btn-danger" value="Да, изтрий го!">
         <a class="btn btn-primary" href="{% url 'index' %}">Размислих, върни ме назад.</a>
-    </div>
     </div>
 </form>
 

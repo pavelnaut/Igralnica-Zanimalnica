@@ -2,6 +2,7 @@
 {% extends 'index.html' %}
 
 {% block body %}
+{% if user.is_authenticated %}
 <div id="content" class="colM">
     <h1>Паролата е сменена успешно</h1>
 
@@ -10,4 +11,7 @@
 
     <br class="clear">
     </div>
+{% else %}
+{% include 'permission_denied.html' %}
+{% endif %}
 {% endblock %}

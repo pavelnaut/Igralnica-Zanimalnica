@@ -1,8 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UsernameField
 from django import forms
-from django.core.validators import EmailValidator
-from django.utils.translation import ugettext_lazy as _
+from django.core.validators import EmailValidator, MinLengthValidator, MaxLengthValidator
 
 from .models import User
 
@@ -16,14 +15,14 @@ class SignUpForm(UserCreationForm):
     choices = list(User.ACADEMIC_CHOICES)
 
     email = forms.EmailField(label='Поща', required=True,
-                             validators=[EmailValidator(message="Не е валиден имейл.")],
+                             validators=[EmailValidator, MaxLengthValidator(50)],
                              widget=forms.EmailInput(
                                  attrs={
                                      'class': 'form-control'
                                  }
                              ))
 
-    password1 = forms.CharField(label='Парола', required=True,
+    password1 = forms.CharField(label='Парола', required=True, validators=[MinLengthValidator(6)],
                                 max_length=32,
                                 widget=forms.PasswordInput(
                                     attrs={
@@ -39,14 +38,16 @@ class SignUpForm(UserCreationForm):
                                     }
                                 ))
 
-    first_name = forms.CharField(label='Име', required=False, max_length=32,
+    first_name = forms.CharField(label='Име', required=False, validators=[MaxLengthValidator(40)],
+                                 max_length=32,
                                  widget=forms.TextInput(
                                      attrs={
                                          'class': 'form-control'
                                      }
                                  ))
 
-    last_name = forms.CharField(label='Фамилия', required=False, max_length=32,
+    last_name = forms.CharField(label='Фамилия', required=False, validators=[MaxLengthValidator(40)],
+                                max_length=32,
                                 widget=forms.TextInput(
                                     attrs={
                                         'class': 'form-control'
@@ -73,24 +74,27 @@ class SignUpForm(UserCreationForm):
 
 
 class EditProfileForm(forms.ModelForm):
+    """
+    Same as register but without password
+    """
     choices = list(User.ACADEMIC_CHOICES)
 
     email = forms.EmailField(label='Поща', required=True,
-                             validators=[EmailValidator(message="Не е валиден имейл.")],
+                             validators=[EmailValidator, MaxLengthValidator(50)],
                              widget=forms.EmailInput(
                                  attrs={
                                      'class': 'form-control'
                                  }
                              ))
 
-    first_name = forms.CharField(label='Име', required=False, max_length=32,
+    first_name = forms.CharField(label='Име', required=False, max_length=32, validators=[MaxLengthValidator(40)],
                                  widget=forms.TextInput(
                                      attrs={
                                          'class': 'form-control'
                                      }
                                  ))
 
-    last_name = forms.CharField(label='Фамилия', required=False, max_length=32,
+    last_name = forms.CharField(label='Фамилия', required=False, max_length=32, validators=[MaxLengthValidator(40)],
                                 widget=forms.TextInput(
                                     attrs={
                                         'class': 'form-control'
@@ -98,10 +102,9 @@ class EditProfileForm(forms.ModelForm):
                                 ))
 
     avatar = forms.ImageField(label='Аватар', required=False,
-                                 widget=forms.FileInput(
+                              widget=forms.FileInput(
                                      attrs={
                                          'class': 'form-control-file',
-
                                      }
                                  ))
 
@@ -118,10 +121,9 @@ class EditProfileForm(forms.ModelForm):
 
 
 class LoginForm(AuthenticationForm):
-
+    """
+    Extended just to get the 'class': 'form-control'
+    attributes of the widget
+    """
     username = UsernameField(label='Поща', widget=forms.TextInput(attrs={'autofocus': True, 'class': 'form-control'}))
-    password = forms.CharField(
-        label=_("Password"),
-        strip=False,
-        widget=forms.PasswordInput(attrs={'class': 'form-control'}),
-                                )
+    password = forms.CharField(label="Парола", strip=False, widget=forms.PasswordInput(attrs={'class': 'form-control'}))

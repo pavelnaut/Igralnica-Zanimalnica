@@ -3,7 +3,6 @@ Django==2.2.1
 django-appconf==1.0.3
 django-bootstrap-datepicker-plus==3.0.5
 django-imagekit==4.0.2
-django-multiupload==0.5.2
 django-phonenumber-field==2.4.0
 phonenumbers==8.10.12
 pilkit==2.0

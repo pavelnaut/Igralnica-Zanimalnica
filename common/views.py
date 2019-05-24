@@ -6,14 +6,14 @@ from django.http import HttpResponseRedirect, HttpResponseBadRequest, HttpRespon
 
 from .models import ChildApplication
 from .forms import ApplicationForm
-
-from accounts.models import User
-
-def index(request):
-    return render(request, 'index.html')
+from django.forms.forms import ValidationError
 
 
 class Application(CreateView):
+    """
+    Only registered users can post. Sends email with form
+    info to page mail account.
+    """
     model = ChildApplication
     template_name = 'application.html'
     form_class = ApplicationForm
@@ -21,11 +21,10 @@ class Application(CreateView):
 
     def post(self, request, *args, **kwargs):
         self.object = None
-
         try:
             user = self.request.user
         except:
-            return HttpResponseForbidden
+            return HttpResponseRedirect('/')
 
         data = request.POST.copy()
 
@@ -40,11 +39,14 @@ class Application(CreateView):
                    f"{data.get('extra')}\n")
         form = ApplicationForm(data)
 
+        if not form.is_valid():
+            raise ValidationError('Неправилно попълнен телефонен номер.')
+        # +359 works 0888 works, but 555555 doesn't
+
         if form.is_valid() and user.is_authenticated:
             form.save()
             send_mail(subject=subject, message=message, from_email=user.email,
                       recipient_list=[settings.EMAIL_HOST_USER], fail_silently=False)
             # mail_admins(subject=subject, message=message) if admins have real mail
             return super().post(data, *args, **kwargs)
-        return HttpResponseBadRequest
-
+        return HttpResponseRedirect('/')

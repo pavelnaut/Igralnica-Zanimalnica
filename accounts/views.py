@@ -9,15 +9,18 @@ from django.views.generic.detail import DetailView
 from .forms import SignUpForm, EditProfileForm, LoginForm
 from .models import User
 
-# do I need this?
+
+# used in 'profile/' url to redirect user
 def redirect_to_user_details(request):
     if request.user.is_authenticated:
-        url = f"{request.user.pk}/"
-        return HttpResponseRedirect(redirect_to=url)
+        return HttpResponseRedirect(redirect_to=f"{request.user.pk}/")
     return HttpResponseRedirect(redirect_to="/")
 
 
 class UserEdit(UpdateView):
+    """
+    User can edit his/her details
+    """
     model = User
     template_name = 'user-edit.html'
     context_object_name = 'user'
@@ -26,6 +29,9 @@ class UserEdit(UpdateView):
 
 
 class UserDetails(DetailView):
+    """
+    User can see his/her details
+    """
     model = User
     template_name = 'user-details.html'
     context_object_name = 'user'

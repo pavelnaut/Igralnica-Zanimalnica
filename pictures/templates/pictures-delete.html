@@ -1,0 +1,30 @@
+<title>Изтрий новина</title>
+{% extends 'index.html' %}
+
+{% block body %}
+{% if user.is_superuser %}
+
+<form method="post">
+    {% csrf_token %}
+    <h1>Сигурни ли сте, че искате да изтриете:</h1>
+    {% load static %}
+    {% if album %}
+        <div class="card" style="width: 18rem;">
+             <center><h5 class="card-title">{{ album.title }}</h5></center>
+             <img src="{% static album.cover %}" class="card-img-top" style="height: 18rem;">
+        </div>
+    {% else %}
+        <div class="card" style="width: 18rem;">
+             <center><h5 class="card-title">{{ picture }}</h5></center>
+             <img src="{% static picture.pic_source %}" class="card-img-top" style="height: 18rem;">
+        </div>
+    {% endif %}
+    <div class="row">
+        <input type="submit" class="btn btn-danger" value="Да, изтрий го!">
+        <a class="btn btn-primary" href="{% url 'gallery' %}">Размислих, върни ме назад.</a>
+    </div>
+</form>
+{% else %}
+{% include 'permission_denied.html' %}
+{% endif %}
+{% endblock %}

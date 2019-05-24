@@ -1,10 +1,9 @@
-from django.urls import path, include
+from django.urls import path
 from django.contrib.auth import views as auth
 
 from . import views
 
-#app_name = "accounts"
-
+# Custom templates were needed to replace Django's default ones
 urlpatterns = [
                path('logout/', auth.LogoutView.as_view(), name='logout'),
                path('profile/', views.redirect_to_user_details, name='redirect-user-details'),
@@ -26,5 +25,4 @@ urlpatterns = [
                path('reset_password/complete/',
                     auth.PasswordResetCompleteView.as_view(template_name='reset-pass-complete.html'),
                     name='password_reset_complete'),
-
                ]

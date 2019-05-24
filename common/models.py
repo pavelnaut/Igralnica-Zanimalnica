@@ -19,7 +19,7 @@ class ChildApplication(models.Model):
     group = models.CharField(verbose_name='клас', max_length=1, choices=GROUP_CHOICES)
     period_from = models.DateField(verbose_name='от')
     period_to = models.DateField(verbose_name='до')
-    phone = PhoneNumberField(verbose_name='телефон',)
+    phone = PhoneNumberField(verbose_name='телефон')
     extra = models.TextField(verbose_name='допълнително', blank=True, null=True)
 
     def __str__(self):

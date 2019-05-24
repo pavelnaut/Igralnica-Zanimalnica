@@ -13,14 +13,6 @@ def redirect_to_commented_post(request):
         url = f"/news/details/{request.post.id}/"
         return HttpResponseRedirect(redirect_to=url)
 
-# so far don't need this?
-def has_access_to_modify(current_user, comment):
-    if current_user.is_superuser:
-        return True
-    elif current_user.id == comment.user.id:
-        return True
-    return False
-
 
 class NewsList(ListView):
     model = Post
@@ -35,7 +27,7 @@ class NewsList(ListView):
 
 class NewsDetail(DetailView):
     '''
-    Not only does it show the full Post, but also shows all
+    Not only does it show the full NewsPost, but also shows all
     the comments belonging to it. Content is public, but only
     registered users can add new comments. Each user can edit/delete
     their own comment. Admins can do whatever they want.
@@ -69,6 +61,10 @@ class NewsDetail(DetailView):
 
 
 class CommentEdit(UpdateView):
+    """
+    Comment owners can edit their comments.
+    Admins can edit all comments.
+    """
     model = Comment
     form_class = CommentForm
     success_url = "/"
@@ -77,9 +73,19 @@ class CommentEdit(UpdateView):
 
 
 class CommentDelete(DeleteView):
+    """
+    Comment owners can delete their comments.
+    Admins can delete all comments.
+    """
     model = Comment
     success_url = '/'
     template_name = 'news-delete.html'
+
+    def post(self, request, *args, **kwargs):
+        user = self.request.user
+        if user.is_superuser or user == self.get_object().user:
+            return self.delete(request, *args, **kwargs)
+        return HttpResponseRedirect('/')
 
 
 # Only Admins have permission for rest of the views

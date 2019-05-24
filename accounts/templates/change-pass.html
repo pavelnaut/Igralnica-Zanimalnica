@@ -2,6 +2,7 @@
 {% extends 'index.html' %}
 
 {% block body %}
+{% if user.is_authenticated %}
 <div class="container-fluid">
     <div class="row">
     <div class="col-lg-3"></div>
@@ -18,4 +19,7 @@
     <div class="col-lg-3"></div>
     </div>
 </div>
+{% else %}
+{% include 'permission_denied.html' %}
+{% endif %}
 {% endblock %}

@@ -12,9 +12,11 @@ from .managers import UserManager
 
 class User(AbstractBaseUser, PermissionsMixin):
     '''
-    Avatar field is using django-imagekit in order to strip image's
-    metadata and to resize it to a smaller size. Jpeg format is shit,
-    that's why we use png, even though it's larger in size.
+    Extended AbstractBaseUser model, in order to replace username with
+    email field for login.
+    Avatar field is using django-imagekit to strip image's metadata
+    and to resize it to a smaller size. Jpeg format is shit, that's
+    why we use png, even though it's larger in size.
     '''
     ACADEMIC_CHOICES = (
         ('P', 'Родител'),
@@ -64,4 +66,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         send_mail(subject, message, from_email, [self.email], **kwargs)
 
     def avatar_source(self):
+        '''
+        Returns properly formatted image source
+        '''
         return f"/avatars/{str(self.avatar).split('/')[3]}"

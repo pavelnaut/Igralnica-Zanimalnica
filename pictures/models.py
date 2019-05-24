@@ -17,6 +17,20 @@ class Album(models.Model):
     def __str__(self):
         return str(self.title)
 
+    # Returns the first picture of the album
+    def cover(self):
+        try:
+            picture = Picture.objects.all().filter(album=self)[0].pic_source()
+            return picture
+        except:
+            return "gallery/default.jpg"    # Do NOT delete default picture.
+
+    # Returns string instead of boolean value
+    def public(self):
+        if self.is_visible:
+            return 'Публичен'
+        return 'Частен'
+
 
 class Picture(models.Model):
     album = models.ForeignKey(Album, verbose_name='албум', on_delete=models.CASCADE, related_name='pictures')
@@ -33,22 +47,3 @@ class Picture(models.Model):
 
     def __str__(self):
         return f'{self.album} - {str(self.picture)}'
-
-
-class PictureComment(models.Model):
-    '''
-    Only registered users should be able to comment.
-    Admins can delete them. Users can edit and delete
-    their own posts.
-    '''
-    user = models.ForeignKey(User, verbose_name='потребител', on_delete=models.CASCADE, related_name='picture_comments')
-    post = models.ForeignKey(Picture, verbose_name='снимка', on_delete=models.CASCADE, related_name='picture_comments')
-    content = models.TextField('съдържание', max_length=640)
-    pub_date = models.DateTimeField('дата на създаване', auto_now=True)
-
-    class Meta:
-        verbose_name = 'коментар'
-        verbose_name_plural = 'коментари'
-
-    def __str__(self):
-        return f'{self.post} - {self.content:.30}'
