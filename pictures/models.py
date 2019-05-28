@@ -1,11 +1,10 @@
 from django.db import models
 
-from imagekit.models import ProcessedImageField
-
-from accounts.models import User
-
 
 class Album(models.Model):
+    """
+    Only public albums are visible to users.
+    """
     title = models.CharField(verbose_name='заглавие', max_length=100)
     pub_date = models.DateField(verbose_name='дата на създаване', auto_now_add=True)
     is_visible = models.BooleanField(verbose_name='публичен', default=True)
@@ -33,6 +32,9 @@ class Album(models.Model):
 
 
 class Picture(models.Model):
+    """
+    Don't forget that Album has to be created first.
+    """
     album = models.ForeignKey(Album, verbose_name='албум', on_delete=models.CASCADE, related_name='pictures')
     picture = models.ImageField(verbose_name='снимка', upload_to='common/static/gallery/', blank=True, null=True)
     pub_date = models.DateField('дата на качване', auto_now_add=True)

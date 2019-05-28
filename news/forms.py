@@ -1,23 +1,7 @@
 from django import forms
 from django.core.validators import MaxLengthValidator
 
-from .models import Comment, Post
-
-
-class CommentForm(forms.ModelForm):
-
-    content = forms.CharField(label='Твоят коментар', required=True, validators=[MaxLengthValidator(640)],
-                              max_length=640,
-                              widget=forms.Textarea(
-                                attrs={
-                                    'class': 'form-control'
-                                      }
-
-                              ))
-
-    class Meta:
-        model = Comment
-        fields = ('content',)
+from .models import Post
 
 
 class PostForm(forms.ModelForm):

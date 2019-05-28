@@ -53,6 +53,12 @@ class AlbumList(ListView):
 
 
 class AlbumDetail(DetailView):
+    """
+    Shows pictures of the selected Album.
+    POST functionality is for Admins only.
+    Multiple pictures can be selected and
+    uploaded at the same time.
+    """
     model = Album
     template_name = 'album.html'
     context_object_name = 'album'

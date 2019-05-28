@@ -1,6 +1,4 @@
 from django.db import models
-from accounts.models import User
-
 
 class Post(models.Model):
     title = models.CharField('заглавие', max_length=50, default='No title')
@@ -17,21 +15,3 @@ class Post(models.Model):
     def __str__(self):
         return f"{self.title:.20}..."
 
-
-class Comment(models.Model):
-    """
-    Only registered users should be able to comment.
-    Admins can delete them. Users can edit and delete
-    their own posts.
-    """
-    user = models.ForeignKey(User, verbose_name='потребител', on_delete=models.CASCADE, related_name='ucomments')
-    post = models.ForeignKey(Post, verbose_name='публикация', on_delete=models.CASCADE, related_name='pcomments')
-    content = models.TextField('съдържание', max_length=640)
-    pub_date = models.DateTimeField('дата на създаване', auto_now=True)
-
-    class Meta:
-        verbose_name = 'коментар'
-        verbose_name_plural = 'коментари'
-
-    def __str__(self):
-        return f'{self.post} - {self.content:.30}'

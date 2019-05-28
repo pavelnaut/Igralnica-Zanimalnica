@@ -4,9 +4,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('news.urls')),
-    path('accounts/', include('accounts.urls')),
     path('pictures/', include('pictures.urls')),
-    path('application/', include('common.urls')),
+    path('application/', include('applications.urls')),
 ]
 
 admin.site.site_header = "Административен павел"  # it's a pun

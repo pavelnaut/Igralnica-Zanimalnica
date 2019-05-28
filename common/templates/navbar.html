@@ -20,21 +20,8 @@
         <a class="nav-link" href="{% url 'gallery' %}">Галерия</a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" href="{% url 'application' %}">Запиши се</a>
+        <a class="nav-link" href="{% url 'application' %}">Форма за записване</a>
       </li>
-       {% if not user.is_authenticated %}
-      <li class="nav-item active">
-        <a class="nav-link" href="{% url 'login' %}">Вход</a>
-      </li>
-       {% else %}
-        <li class="nav-item active dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Профил
-        </a>
-           {% endif %}
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="{% url 'user-details' user.id %}">Детайли</a>
-          <a class="dropdown-item" href="{% url 'logout' %}">Излез</a>
           {% if user.is_superuser %}
                 <li class="nav-item active">
         <a class="nav-link" href="/admin/">Админ панел</a>
@@ -43,7 +30,7 @@
         <a class="nav-link" href="{% url 'create' %}">Добави публикация</a>
       </li>
           {% endif %}
-        </div>
+
     </ul>
   </div>
 </nav>

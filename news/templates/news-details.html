@@ -13,43 +13,12 @@
                             <h5 class="card-title">{{post.title}}</h5>
                                 <p class="card-text">{{post.content}}</p>
                                 <p class="card-text"><i>Публикувано на {{post.pub_date}}</i></p>
-
-            <div class="container" style="margin-top: 2%">
-                {% for comment in comments %}
-                <div class="card" style="width: 30rem;">
-                    <div class="row">
-                    <div class="col-lg-3">
-                        {% load static %}
-                        <img class="rounded-circle" src="{% static comment.user.avatar_source %}" alt="Аватар" width="140" height="140">
-                        </div>
-                        <div class="col-lg-9">
-                            <div class="card-body" style="border: 5%">
-                        <h6 class="card-title">{{comment.user.get_full_name }}</h6>
-                                {% if comment.user.is_superuser %}
-                        <h6 class="card-title">Админ</h6>
-                                {% else %}
-                        <h6 class="card-title">{{comment.user.get_kind_display }}</h6>
-                                {% endif %}
-                        <p class="card-text">{{comment.content}}</p>
-                                <p class="card-text"><i><small>Публикувано на {{comment.pub_date}}</small></i></p>
-                        {% if user.is_superuser or comment.user == user %}
-                        <a href="{% url 'edit_comment' comment.pk %} " class="btn btn-success">Редактирай</a>
-                        <a href="{% url 'delete_comment' comment.pk %} " class="btn btn-danger">Изтрий</a>
-                        {% endif %}
-                        </div>
                         </div>
                     </div>
-                </div>
-                {% endfor %}
-                <div class="col-lg-2"></div>
-{% include 'comment.html' %}
             </div>
         </div>
+        <div class="col-lg-2"></div>
     </div>
 </div>
-</div>
-</div>
-</div>
-
 
 {% endblock %}
