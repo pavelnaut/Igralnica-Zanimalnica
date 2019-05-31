@@ -11,7 +11,11 @@
                     <div class="card" style="width: 40rem;">
                         <div class="card-body" style="border: 5%">
                             <h5 class="card-title">{{post.title}}</h5>
-                                <p class="card-text">{{post.content}}</p>
+                                <p class="card-text">
+                                    {% autoescape off %}
+                                    {{ post.content }}
+                                    {% endautoescape %}
+                                </p>
                                 <p class="card-text"><i>Публикувано на {{post.pub_date}}</i></p>
                         </div>
                     </div>

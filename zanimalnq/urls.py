@@ -6,6 +6,7 @@ urlpatterns = [
     path('', include('news.urls')),
     path('pictures/', include('pictures.urls')),
     path('application/', include('applications.urls')),
+    path('', include('cms.urls')),
 ]
 
 admin.site.site_header = "Административен павел"  # it's a pun

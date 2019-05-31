@@ -10,7 +10,13 @@
                     <div class="card" style="width: 40rem;">
                         <div class="card-body" style="border: 5%">
                             <h5 class="card-title">{{post.title}}</h5>
-                                <p class="card-text">{{post.short_content}}</p>
+                            <div class="container">
+                                <p class="card-text">
+                                    {% load static %}
+                                    {% autoescape off %}
+                                    {{ post.content }}
+                                    {% endautoescape %}</p>
+                            </div>
                                 <a href="{% url 'details' post.id %}" class="btn btn-primary">Прочети още</a>
 
                                 {% if user.is_superuser %}
