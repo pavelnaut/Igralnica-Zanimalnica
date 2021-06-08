@@ -6,7 +6,7 @@ django-imagekit==4.0.2
 django-phonenumber-field==2.4.0
 phonenumbers==8.10.12
 pilkit==2.0
-Pillow==6.0.0
+Pillow==8.2.0
 pytz==2019.1
 six==1.12.0
 sqlparse==0.3.0
